@@ -26,6 +26,7 @@ end_year = 2020
 # points scored by a single team.
 temp = split.all_split_two_rows(prev_count, end_year)
 
+
 # Create and save a boxplot of points differential for each game before removing the relevant column
 fig, ax = plt.subplots(figsize=(12, 4))
 sns.boxplot(x=abs(temp.home_margin))
@@ -34,6 +35,7 @@ x = plt.xticks(np.arange(0, 65, step=5))
 plt.xlabel('Points Differential')
 fig.savefig(str(r'eda\graphs\pts_diff.png'))
 fig.clf()
+
 
 # Remove some columns which will definitely not be features such as team name and recorded stats for the game we
 # are trying to predict. Reorganize columns.
@@ -57,6 +59,7 @@ for stat in stat_name_simple:
                 cmap="Blues", annot=True, fmt='.2f', vmin=0)
     fig.savefig(path)
     fig.clf()
+
 
 # Remove other recorded stats for the game other than points as we already explored their correlations and are not
 # trying to predict those.
@@ -90,11 +93,13 @@ plt.setp(ax.xaxis.get_majorticklabels(), rotation=75)
 fig.savefig(str(r'eda\graphs\corr_prev_count.png'))
 fig.clf()
 
+
 # Correlation heat map for all variables. needs larger size to fit all the extra rows/columns
 fig, ax = plt.subplots(figsize=(16, 12.8))
 sns.heatmap(X.corr(), cmap="RdPu", annot=True, fmt='.2f', vmin=0)
 fig.savefig(str(r'eda\graphs\corr_all_' + str(prev_count) + '.png'))
 fig.clf()
+
 
 # Creates a plot with 14 subplots
 fig, ax = plt.subplots(7, 2, figsize=(13, 16), sharey=False)

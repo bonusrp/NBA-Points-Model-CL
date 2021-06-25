@@ -5,27 +5,6 @@ from util import split
 from util import feat
 from util import dictionaries as di
 
-# or we can just not and for the really egregious one which is poss_all/_got we can get the 'difference' of them.
-# but this is phase three after we get another baseline with _advanced data model.
-'''
-corr_matrix = feats.corr().abs()
-# Select upper triangle of correlation matrix
-upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(np.bool))
-# Find features with correlation greater than 0.95
-to_drop = [column for column in upper.columns if any(upper[column] > 0.95)]
-# Drop features
-df.drop(to_drop, axis=1, inplace=True)'''
-################### Use this one to decide which one to keep by checking the pair with the corr
-# with pts_home and keeping higher one
-'''# Loop through columns to find any row/col that has high correlation.
-# keep list of the two
-for column in upper.columns:
-    temp = upper.loc[upper.loc[:, column] > 0.95]
-    if not temp.empty:
-        print('this is row,', temp.index.values)
-        print('this is col,', column)
-'''
-
 # For each data set create a csv which only includes features (averages), target variable (pts_), and
 # bookmaker's prediction of the target variable (ou_).
 data_name = [r"processed\clean_data_simple_", r"processed\clean_data_advanced_"]
