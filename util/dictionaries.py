@@ -154,10 +154,13 @@ algos_name = ['HuberRegressor', 'MLPRegressor', 'KNeighborsRegressor',
 margins = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 # For optimization of final model, XGBRegressor
-margins_opt = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-lower_bounds_opt = [-110, -105, 100, 105, 110]
+margins_opt = [-5, -5.5, -4, -4.5, -3, -3.5, -2, -2.5, -1, -1.5,
+               0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5,
+               6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10]
+lower_bounds_opt = [-110, -105, 100, 105, 110, 115, 120]
 algos_name_opt = 'XGBRegressor'
+num_folds_opt = 5
 
 # For testing of final model
-margins_test = [-3]
-lower_bounds_test = 110
+margins_test = [-1.5]
+lower_bounds_test = 120

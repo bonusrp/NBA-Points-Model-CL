@@ -101,7 +101,7 @@ if __name__ == '__main__':
                                          reg_alpha=np.round(param_df.reg_alpha[0], 5),
                                          reg_lambda=np.round(param_df.reg_lambda[0], 5),
                                          subsample=np.round(param_df.subsample[0], 2),
-                                         n_jobs=4, n_estimators=50,
+                                         n_jobs=6, n_estimators=50,
                                          eval_metric='mae', tree_method='hist', booster='gbtree', base_score=105,
                                          verbosity=0, random_state=rand_int).fit(X, y)
             # print(model_xgb.get_booster().get_score(importance_type="gain"))
@@ -109,7 +109,7 @@ if __name__ == '__main__':
             pred_df.loc[:, str(rand_int)] = pd.Series(model_xgb.predict(X_test))
 
         # Get median of all predictions and evaluate
-        prediction = pred_df.median(axis=1)
+        prediction = pred_df.mean(axis=1)
 
         # Calculating prediction variance
         pred_var.loc['Vegas', str(end_year)] = vegas_y_test.var()

@@ -109,7 +109,7 @@ if __name__ == '__main__':
 
     z = opt_mlud.lower_odds.unique()
     col = [sns.color_palette("husl", 8)[0], sns.color_palette("husl", 8)[5],
-           sns.color_palette("husl", 8)[7], '#7bc043', '#851e3e']
+           sns.color_palette("husl", 8)[7], '#4A46CE', '#851e3e', '#D71616', '#7bc043']
     fig, ax = plt.subplots(1, 1, figsize=(10, 6))
     # Remove white space around plot for better fit into latex
     plt.subplots_adjust(left=0.1, right=0.95, top=0.95, bottom=0.1, wspace=.12, hspace=.25)
@@ -117,13 +117,13 @@ if __name__ == '__main__':
         fig = sns.regplot(x=opt_mlud.threshold[opt_mlud.loc[opt_mlud.loc[:, 'lower_odds'] == z[lower_temp]].index],
                           y=round(opt_mlud.dollars[opt_mlud.loc[opt_mlud.loc[:, 'lower_odds'] == z[lower_temp]].index],
                                   0),
-                          y_jitter=100, color=col[lower_temp], line_kws={"lw": 1.7},
+                          y_jitter=100, color=col[lower_temp], line_kws={"lw": 1.3},
                           order=3, ci=None, label=str(z[lower_temp]))
 
-    fig.set_ylim([-5000, max(opt_mlud.dollars) + 3000])
+    fig.set_ylim([min(min(opt_mlud.dollars) - 3000, -5000), max(opt_mlud.dollars) + 3000])
     fig.set_xlim([min(opt_mlud.threshold) - 0.5, max(opt_mlud.threshold) + 0.5])
 
-    fig.set_xticks(range(min(opt_mlud.threshold), max(opt_mlud.threshold) + 1, 1))
+    fig.set_xticks(range(int(min(opt_mlud.threshold)), int(max(opt_mlud.threshold)) + 1, 1))
 
     fig.legend(title='Lowest Odds')
     fig.set_ylabel('Net Gain ($)')
@@ -166,8 +166,7 @@ if __name__ == '__main__':
                  marker='o', dashes=False, ax=ax[1])
 
     mod_type_temp = ['Vegas', 'XGB']
-    # label points on the plot
-    for mod_type_num in range(len(mod_type_temp)):
+    for mod_type_num in range(len(mod_type_temp)):  # Label points on the plot first subplot
         for x, y in zip(mae_df.loc[mae_df.loc[:, 'model'] == mod_type_temp[mod_type_num]].year,
                         mae_df.loc[mae_df.loc[:, 'model'] == mod_type_temp[mod_type_num]].mae):
             # the position of the data label relative to the data point can be adjusted by adding/subtracting a value
@@ -176,7 +175,7 @@ if __name__ == '__main__':
                        y=y - 0.235,  # y-coordinate position of data label, adjusted to be 150 below the data point
                        s='{: .2f}'.format(y),  # data label, formatted to ignore decimals
                        color=col[mod_type_num])  # set colour of line
-    for mod_type_num in range(len(mod_type_temp)):
+    for mod_type_num in range(len(mod_type_temp)):  # Second subplot
         for x, y in zip(exvar_df.loc[exvar_df.loc[:, 'model'] == mod_type_temp[mod_type_num]].year,
                         exvar_df.loc[exvar_df.loc[:, 'model'] == mod_type_temp[mod_type_num]].exvar):
             # the position of the data label relative to the data point can be adjusted by adding/subtracting a value
@@ -251,12 +250,12 @@ if __name__ == '__main__':
                        color='black', ha='center')
     for x, y in zip(mlud_df.year, mlud_df.win_pct):
         # Manual positioning
-        if x == 2018:
-            ax[1].text(x=x - 0.05, y=y - 0.1, s='{: .1f}%'.format(y), color='black')
+        if x == 2018 or x == 2015 or x == 2019 or x == 2017:
+            ax[1].text(x=x - 0.12, y=y - 0.13, s='{: .1f}%'.format(y), color='black')
         elif x == 2020:
             ax[1].text(x=x - 0.17, y=y + 0.05, s='{: .1f}%'.format(y), color='black')
         else:
-            ax[1].text(x=x - 0.07, y=y + 0.05, s='{: .1f}%'.format(y), color='black')
+            ax[1].text(x=x - 0.12, y=y + 0.05, s='{: .1f}%'.format(y), color='black')
 
     for ax_num in [0, 1]:
         ax[ax_num].set_xlabel('')
