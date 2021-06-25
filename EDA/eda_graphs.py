@@ -96,7 +96,6 @@ sns.heatmap(X.corr(), cmap="RdPu", annot=True, fmt='.2f', vmin=0)
 fig.savefig(str(r'eda\graphs\corr_all_' + str(prev_count) + '.png'))
 fig.clf()
 
-# TODO: rename subplot row axis to not include the _a
 # Creates a plot with 14 subplots
 fig, ax = plt.subplots(7, 2, figsize=(13, 16), sharey=False)
 # Manually adjust hspace between each plot as x_label was being cut off

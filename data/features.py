@@ -5,7 +5,6 @@ from util import split
 from util import feat
 from util import dictionaries as di
 
-# TODO: Do the corr variable kill thing here. @games_get_avg.py's todo
 # or we can just not and for the really egregious one which is poss_all/_got we can get the 'difference' of them.
 # but this is phase three after we get another baseline with _advanced data model.
 '''
@@ -43,10 +42,6 @@ for i in tqdm(range(len(data_name))):
         data_df = pd.read_csv(data_name[i] + str(prev_count) + '.csv')
 
         feats = split.feat_split_two_rows(data_df, f_names)
-        # TODO: potentially expand on this section with the feat interactions and how we will go about choosing
-        #  em. Can do it for only a few high correlation ones, can try to learn it for every prediction which
-        #  will be next level compute. Can just set 0.52/0.48 arbitrary for all just for testing and if its better
-        #  on median error AND betting results THEN we can do learning every single stat.
         # Create interaction variables
         feat.diff_int(feats, data_type[i])
         # Append the features df

@@ -87,7 +87,7 @@ if __name__ == '__main__':
     feat_df = pd.read_csv(feat_file_name[i] + str(prev_count) + '.csv')
     data_df = pd.read_csv(data_name[i] + str(prev_count) + '.csv')
 
-    for yr_type in ['all_yrs', 'three_yrs']:
+    for yr_type in ['all_yrs']:
         mae_df = pd.DataFrame()
         exvar_df = pd.DataFrame()
 
