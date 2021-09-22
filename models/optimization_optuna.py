@@ -53,6 +53,7 @@ def objective(trial, X, y, X_test, y_test, bet_df, bet_df_test):
 
     # Initialize folds
     num_folds = di.num_folds_opt
+    # Can use shuffle which is still unrealistic but more realistic than training on 2014 and testing on 2012
     kf = model_selection.KFold(n_splits=num_folds, shuffle=True, random_state=12)
     # Dict and lists datasets through kfolds
     X_train_l = []
@@ -61,8 +62,6 @@ def objective(trial, X, y, X_test, y_test, bet_df, bet_df_test):
     y_val_l = []
     bet_df_val_l = []
 
-    # Can use no shuffle which is still unrealistic but more realistic than training on 2014 and testing on 2012
-    # This is with no shuffle
     for train_index, test_index in kf.split(X[::2]):
         # Get the training rows and their pair store and sort them in an np.array
         # Need to multiply by 2 because kf.split renumbers X[::2] and returns new index numbers while
